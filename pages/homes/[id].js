@@ -1,8 +1,7 @@
-
-
-import Image from 'next/image';
-import Layout from '@/components/Layout';
-import { PrismaClient } from '@prisma/client';
+import Image from "next/image";
+import Layout from "@/components/Layout";
+import { PrismaClient } from "@prisma/client";
+import { useRouter } from "next/router";
 
 const prisma = new PrismaClient();
 
@@ -11,21 +10,27 @@ export async function getStaticPaths() {
     select: { id: true },
   });
   return {
-    paths: homes.map(home => ({
+    paths: homes.map((home) => ({
       params: { id: home.id },
     })),
-    fallback: false,
+    fallback: true,
   };
 }
 
 const ListedHome = (home = null) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return "Loading...";
+  }
+
   return (
     <Layout>
       <div className="max-w-screen-lg mx-auto">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-4 space-y-4">
           <div>
             <h1 className="text-2xl font-semibold truncate">
-              {home?.title ?? ''}
+              {home?.title ?? ""}
             </h1>
             <ol className="inline-flex items-center space-x-1 text-gray-500">
               <li>
@@ -54,14 +59,13 @@ const ListedHome = (home = null) => {
           ) : null}
         </div>
 
-        <p className="mt-8 text-lg">{home?.description ?? ''}</p>
+        <p className="mt-8 text-lg">{home?.description ?? ""}</p>
       </div>
     </Layout>
   );
 };
 
 export async function getStaticProps({ params }) {
-
   const home = await prisma.home.findUnique({
     where: { id: params.id },
   });
@@ -74,7 +78,7 @@ export async function getStaticProps({ params }) {
 
   return {
     redirect: {
-      destination: '/',
+      destination: "/",
       permanent: false,
     },
   };
