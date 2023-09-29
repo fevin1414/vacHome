@@ -53,7 +53,7 @@ const Layout = ({ children = null }) => {
   return (
     <>
       <Head>
-        <title>SupaVacation | The Modern Dev</title>
+        <title>vacHome | Fevin Biju</title>
         <meta
           name="title"
           content="Learn how to Build a Fullstack App with Next.js, PlanetScale & Prisma | The Modern Dev"
@@ -69,7 +69,7 @@ const Layout = ({ children = null }) => {
                 <a className="flex items-center space-x-1">
                   <SparklesIcon className="shrink-0 w-8 h-8 text-rose-500" />
                   <span className="text-xl font-semibold tracking-wide">
-                    Supa<span className="text-rose-600">Vacation</span>
+                    vac<span className="text-rose-600">Home</span>
                   </span>
                 </a>
               </Link>
