@@ -14,13 +14,14 @@ import {
   SparklesIcon,
   UserIcon,
 } from '@heroicons/react/outline';
+import { useSession } from 'next-auth/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 
 const menuItems = [
   {
     label: 'List a new home',
     icon: PlusIcon,
-    href: '/list',
+    href: '/create',
   },
   {
     label: 'My homes',
@@ -32,20 +33,21 @@ const menuItems = [
     icon: HeartIcon,
     href: '/favorites',
   },
-  {
-    label: 'Logout',
-    icon: LogoutIcon,
-    onClick: () => null,
-  },
+  // {
+  //   label: 'Logout',
+  //   icon: LogoutIcon,
+  //   onClick: signOut,
+  // },
 ];
 
 const Layout = ({ children = null }) => {
   const router = useRouter();
 
-  const [showModal, setShowModal] = useState(false);
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const isLoadingUser = status === 'loading';
 
-  const user = null;
-  const isLoadingUser = false;
+  const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
