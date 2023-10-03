@@ -1,12 +1,18 @@
 import '../styles/globals.css';
+import { SessionProvider as AuthProvider } from 'next-auth/react';
+
 import { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Component {...pageProps} />
+           <AuthProvider session={session}>
+        <Component {...pageProps} />
+      </AuthProvider>
+
       <Toaster />
-    </>
+     </>
+
   );
 }
 
