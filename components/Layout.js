@@ -14,7 +14,7 @@ import {
   SparklesIcon,
   UserIcon,
 } from '@heroicons/react/outline';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 
 const menuItems = [
@@ -33,11 +33,11 @@ const menuItems = [
     icon: HeartIcon,
     href: '/favorites',
   },
-  // {
-  //   label: 'Logout',
-  //   icon: LogoutIcon,
-  //   onClick: signOut,
-  // },
+  {
+    label: 'Logout',
+    icon: LogoutIcon,
+    onClick: signOut,
+  },
 ];
 
 const Layout = ({ children = null }) => {
